@@ -36,7 +36,8 @@ module.exports = function serve(cb) {
    gulp.watch("dist/pages/**/*.html").on("change", server.reload);
    gulp.watch("dist/css/**/*.css").on("change", server.reload);
    gulp.watch("dist/img/**/*.{png,jpg,webp,svg}").on("change", server.reload);
-   gulp.watch("dist/js/**/*.js").on("change", server.reload);
+	gulp.watch("dist/js/**/*.js").on("change", server.reload);
+	
    //gulp
    //   .watch("src/js/**/*.js", gulp.series(script))
    //	.on("change", server.reload);

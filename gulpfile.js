@@ -11,7 +11,7 @@ const minJpg = require("./gulp/tasks/img/min_jpg");
 const serve = require("./gulp/tasks/serve");
 const script = require("./gulp/tasks/script");
 const cache = require("./gulp/tasks/clearCache");
-
+const svgSprite = require("./gulp/tasks/svgSprite")
 
 gulp.task("img", gulp.parallel(webp, svg, minPng));
 gulp.task("page", pug2html);
@@ -27,14 +27,15 @@ const build = gulp.parallel(
    font,
    webp,
    svg,
-   minPng,
+	minPng,
+	svgSprite
 );
 
 gulp.task("build", gulp.series(clean, cache, build));
 
 gulp.task("dev", gulp.series(build, serve));
 
-gulp.task("default", gulp.parallel(pug2html));
+gulp.task("default", gulp.parallel(svgSprite));
 
 //gulp.task('default', "dev");
 
