@@ -5,26 +5,26 @@
 ### 1. Установить node_modules
 
 ```
-npm install 
+$ npm install 
 ```
 
 ### 2. Получить файлы с плагинами для css и js из node_modules
 
 ```
-gulp getLib - п
+$ gulp getLib 
 ```
 
 ## Опции  
 ### 1. Запуск сервера для разработки и отслеживания файлов
 
 ```
-gulp dev
+$ gulp dev
 ```
 
 ### 2. Очистка папки dist и полная компиляцией всех файлов из папки src в dist
 
 ```
-gulp build 
+$ gulp build 
 ```
 
 ## Особенности
