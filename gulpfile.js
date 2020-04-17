@@ -33,6 +33,8 @@ const build = gulp.parallel(
 
 gulp.task("build", gulp.series(clean, cache, build));
 
+// watch sprite, browser sync, readme.
+
 gulp.task("dev", gulp.series(build, serve));
 
 gulp.task("default", gulp.parallel(svgSprite));
