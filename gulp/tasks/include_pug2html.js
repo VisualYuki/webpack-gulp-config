@@ -8,13 +8,12 @@ const notify = require("gulp-notify");
 
 //посмотреть pug linter
 
-module.exports = function pug2html() {
+module.exports = function include_pug2html() {
 	let src = "src/pug/pages/**/*.pug";
 	let dist = "dist/pages";
 	
    return gulp
-		.src(src,{since: gulp.lastRun(pug2html)})
-		.pipe(newer(dist))
+		.src(src)
       .pipe(plumber())
       .pipe(pugLinter({ reporter: "default" }))
       .pipe(

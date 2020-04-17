@@ -1,7 +1,6 @@
 let gulp = require("gulp");
 
 const font = require("./gulp/tasks/fonts");
-const img_webp = require("./gulp/tasks/img/img_webp");
 const pug2html = require("./gulp/tasks/pug2html");
 const clean = require("./gulp/tasks/clean/clean");
 const style = require("./gulp/tasks/style");
@@ -11,6 +10,8 @@ const minPng = require("./gulp/tasks/img/min_png");
 const minJpg = require("./gulp/tasks/img/min_jpg");
 const serve = require("./gulp/tasks/serve");
 const script = require("./gulp/tasks/script");
+const cache = require("./gulp/tasks/clearCache");
+
 
 gulp.task("img", gulp.parallel(webp, svg, minPng));
 gulp.task("page", pug2html);
@@ -19,13 +20,23 @@ gulp.task("font", font);
 
 //const dev = gulp.parallel();
 
-const build = gulp.series(
-   clean,
-   gulp.parallel(pug2html, style, script, font, webp, svg, minPng)
-); 
+const build = gulp.parallel(
+   pug2html,
+   style,
+   script,
+   font,
+   webp,
+   svg,
+   minPng,
+);
 
-gulp.task("build", build);
+gulp.task("build", gulp.series(clean, cache, build));
+
 gulp.task("dev", gulp.series(build, serve));
+
+gulp.task("default", gulp.parallel(pug2html));
+
+//gulp.task('default', "dev");
 
 let Libs = ["node_modules/@fancyapps/**/*.*", "node_modules/jquery/**/*.*"];
 gulp.task("getLib", gulp.parallel(fancyBox, jquery, slickCarousel));

@@ -1,16 +1,17 @@
 const gulp = require("gulp");
 const gulpPngquant = require("gulp-pngquant");
+const newer = require("gulp-newer");
 
-
-module.exports = function min_png_jpg() {
+module.exports = function min_png() {
    let src = "src/img/**/*.png";
-   let dest = "dist/min-img";
+   let dist = "dist/min-img";
    return gulp
-      .src(src)
+      .src(src,{since: gulp.lastRun(min_png)})
+      .pipe(newer(dist))
       .pipe(
          gulpPngquant({
             quality: "65-75",
          })
       )
-      .pipe(gulp.dest(dest));
+      .pipe(gulp.dest(dist));
 };

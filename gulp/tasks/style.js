@@ -7,19 +7,23 @@ const cleanCSS = require("gulp-clean-css");
 const rename = require("gulp-rename");
 const plumber = require("gulp-plumber");
 const gulpif = require("gulp-if");
+const newer = require("gulp-newer");
+const notify = require("gulp-notify");
 
-module.exports = function styles() {
+module.exports = function style() {
    let src = "src/less/main.less";
-   let dest = "dist/css";
+   let dist = "dist/css";
 
    let isDev = true;
    let isProd = !isDev;
 
    return gulp
-      .src(src)
+		.src(src, {since: gulp.lastRun(style)})
+		.pipe(newer(dist))
       .pipe(plumber())
       .pipe(gulpif(isProd, sourcemaps.init()))
-      .pipe(less())
+		.pipe(less())
+	
 		.pipe(gulpif(isProd,autoprefixer()))
       .pipe(gulpif(isProd, shorthand()))
       .pipe(
@@ -39,5 +43,5 @@ module.exports = function styles() {
       )
       .pipe(gulpif(isProd, sourcemaps.write()))
       .pipe(rename({ suffix: ".min" }))
-      .pipe(gulp.dest(dest));
+      .pipe(gulp.dest(dist));
 };

@@ -1,2 +1,8 @@
-console.log("test-2");
-console.log("test-2");
+function sum(a,b = 5){
+	 console.log(a + b);
+}
+
+sum(1,3);
+sum(15,30);
+sum(0);
+
