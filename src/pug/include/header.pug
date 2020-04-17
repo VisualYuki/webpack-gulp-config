@@ -1,0 +1,21 @@
+mixin header(colorClass)
+   header(class = `header ${colorClass}`)
+      .header-__inner
+         .header__logo-block
+            img.header__logo-menu( src = "../img/01_header/menu-icon.svg", alt="Меню" )
+            .header__logo-img( src = "../img/01_header/white-logo.webp", alt="ROOVER" )
+            .header__logo-city
+         nav.header__nav
+            ul.header__nav-items
+               each title in ["Диваны", "Где купить","Контакты","О нас"]
+                  li.header__nav-item 
+                     a(href="#") 
+                        = title         
+         .header__right-wrapper
+            .header__sofa-wrapper
+               img.header__sofa-img( src = "../img/01_header/white-logo.webp" )
+               .header__sofa-text
+            .header__phone-wrapper
+               .header__phone-img( src = "../img/01_header/white-logo.webp")
+               .header__phone-text
+          
