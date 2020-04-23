@@ -1,5 +1,5 @@
 const gulp = require("gulp");
-const imagemin = require("gulp-imagemin");
+var imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
 
 module.exports = function min_jpg () {
@@ -10,9 +10,7 @@ module.exports = function min_jpg () {
 		.src(src, {since: gulp.lastRun(min_jpg)})
 		.pipe(newer(dist))
 		.pipe(
-			imagemin({
-				progressive: true,
-			})
+			imagemin()
 		)
 		.pipe(gulp.dest(dist));
 };

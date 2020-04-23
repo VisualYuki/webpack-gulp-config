@@ -4,29 +4,22 @@ const htmlValidator = require("gulp-w3c-html-validator");
 const pugLinter = require("gulp-pug-linter");
 const plumber = require("gulp-plumber");
 const newer = require("gulp-newer");
-const notify = require("gulp-notify");
-
-//посмотреть pug linter
+const pugLintStylish = require("puglint-stylish");
 
 module.exports = function pug2html() {
-	let src = "src/pug/pages/**/*.pug";
-	let dist = "dist/pages";
-	
+   let src = "src/pug/pages/**/*.pug";
+   let dist = "dist/pages";
+
    return gulp
-		.src(src,{since: gulp.lastRun(pug2html)})
-		.pipe(newer(dist))
+      .src(src, { since: gulp.lastRun(pug2html) })
+      .pipe(newer(dist))
       .pipe(plumber())
-      .pipe(pugLinter({ reporter: "default" }))
+      .pipe(pugLinter({ reporter: pugLintStylish }))
       .pipe(
          pug({
             pretty: true,
          })
-		)
-		//.on("error", notify.onError())
-		.on("error", function(err){
-			console.log(err.message);
-			this.end();
-		})
-      .pipe(htmlValidator())
+      )
+		.pipe(htmlValidator())
       .pipe(gulp.dest(dist));
 };

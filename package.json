@@ -25,6 +25,7 @@
 		"gulp-clean-css": "^4.3.0",
 		"gulp-concat": "^2.6.1",
 		"gulp-eslint": "^6.0.0",
+		"gulp-html-validator": "0.0.5",
 		"gulp-if": "^3.0.0",
 		"gulp-imagemin": "^2.2.0",
 		"gulp-less": "^4.0.1",
@@ -48,6 +49,7 @@
 		"imagemin-webp": "^5.1.0",
 		"less-plugin-autoprefix": "^2.0.0",
 		"magnific-popup": "^1.1.0",
+		"puglint-stylish": "^1.1.0",
 		"webpack-stream": "^5.2.1"
 	},
 	"dependencies": {
@@ -55,5 +57,6 @@
 		"jquery": "^3.5.0",
 		"normalize.css": "^8.0.1",
 		"slick-carousel": "^1.8.1"
-	}
+	},
+	"extends": "pug-lint.json"
 }

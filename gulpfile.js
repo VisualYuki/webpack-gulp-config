@@ -7,13 +7,29 @@ const style = require("./gulp/tasks/style");
 const webp = require("./gulp/tasks/img/img_webp");
 const svg = require("./gulp/tasks/img/img_svg");
 const minPng = require("./gulp/tasks/img/min_png");
-const minJpg = require("./gulp/tasks/img/min_jpg");
+//var minJpg = require("./gulp/tasks/img/min_jpg");
 const serve = require("./gulp/tasks/serve");
 const script = require("./gulp/tasks/script");
 const cache = require("./gulp/tasks/clearCache");
-const svgSprite = require("./gulp/tasks/svgSprite")
+
+
+const svgSprite = require("./gulp/tasks/svgSprite");
+
+const newer = require("gulp-newer");
+var imagemin = require("gulp-imagemin");
+function min_jpg() {
+   let src = "src/img/**/*.{jpeg,jpg}";
+   let dist = "dist/min-img";
+
+   return gulp
+      .src(src, { since: gulp.lastRun(min_jpg) })
+      .pipe(newer(dist))
+      .pipe(imagemin())
+      .pipe(gulp.dest(dist));
+}
 
 gulp.task("img", gulp.parallel(webp, svg, minPng));
+gulp.task("min-img", gulp.parallel(minPng, min_jpg));
 gulp.task("page", pug2html);
 gulp.task("style", style);
 gulp.task("font", font);
@@ -27,8 +43,8 @@ const build = gulp.parallel(
    font,
    webp,
    svg,
-	minPng,
-	svgSprite
+   minPng,
+   svgSprite
 );
 
 gulp.task("build", gulp.series(clean, cache, build));
@@ -37,7 +53,7 @@ gulp.task("build", gulp.series(clean, cache, build));
 
 gulp.task("dev", gulp.series(build, serve));
 
-gulp.task("default", gulp.parallel(svgSprite));
+gulp.task("default", gulp.parallel(pug2html));
 
 //gulp.task('default', "dev");
 
@@ -48,6 +64,9 @@ gulp.task("getLib", gulp.parallel(fancyBox, jquery, slickCarousel));
 //function libDist(){
 //	return gulp.src()
 //}
+
+// Gulp
+
 
 function fancyBox() {
    return gulp
