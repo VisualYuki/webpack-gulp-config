@@ -9,6 +9,10 @@ const plumber = require("gulp-plumber");
 const gulpif = require("gulp-if");
 const newer = require("gulp-newer");
 const notify = require("gulp-notify");
+const gulpStylelint = require('gulp-stylelint')
+
+
+//import {isProd} from '../../gulpfile.js';
 
 module.exports = function style() {
    let src = "src/less/main.less";
@@ -18,9 +22,19 @@ module.exports = function style() {
    let isProd = !isDev;
 
    return gulp
-		.src(src, {since: gulp.lastRun(style)})
-		.pipe(newer(dist))
-      .pipe(plumber())
+		//.src(src, {since: gulp.lastRun(style)})
+		.src(src)
+		//.pipe(newer(dist))
+		.pipe(plumber())
+		.pipe(gulpStylelint({
+			failAfterError: false,
+			reporters: [
+			  {
+				 formatter: 'string',
+				 console: true
+			  }
+			]
+		 }))
       .pipe(gulpif(isProd, sourcemaps.init()))
 		.pipe(less())
 	

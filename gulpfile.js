@@ -35,6 +35,8 @@ gulp.task("style", style);
 gulp.task("font", font);
 
 //const dev = gulp.parallel();
+//export const isDev = true;
+//export const isDev = false;
 
 const build = gulp.parallel(
    pug2html,
@@ -53,7 +55,7 @@ gulp.task("build", gulp.series(clean, cache, build));
 
 gulp.task("dev", gulp.series(build, serve));
 
-gulp.task("default", gulp.parallel(pug2html));
+gulp.task("default", gulp.parallel(style));
 
 //gulp.task('default', "dev");
 
